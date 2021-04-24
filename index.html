@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>тв прямой эфир</title>
+<!--meta name="viewport" content="width=device-width, initial-scale=1"-->
+ <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+<link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet1" type="text/css"></link>
+<link href="stylel.css" rel="stylesheet" type="text/css"></link>
+  <link crossorigin="anonymous" href="bootstrap.min.css" rel="stylesheet1"></link>
+<script type="text/javascript" src="bitmovinplayer.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+/*start HideBitmovinLogo*/
+.bmpui-ui-watermark {
+  display: none;
+}
+/*end HideBitmovinLogo*/
+@media (min-width: 991px) {
+    .code-block {
+        float: right;
+    }
+
+    .info-block {
+        float: left;
+    }
+}
+
+.button-container {
+    margin-bottom: 25px;
+}
+
+.button-container .channel-button {
+    width: 96%;
+    height: 3em;
+    background-color: #64628b;
+    border: 0;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.1em;
+    background-size: 55px 55px;
+    margin: 4px 2px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.button-container .channel-button:hover {
+    background-color: #4CAF50;
+    color: #fefefe;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    width: 100%;
+    border: 1px solid #ddd;
+}
+th, td {
+    align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+  
+</style>
+</head>
+
+<body>
+  
+  <header>
+    <h1>ИНТЕРНЕТ ТЕЛЕВИЗОР "ПОТОК"</h1>
+    <br>
+    <h2>ВЕБ - СТУДИЯ "HHCJS" ПРЕДСТАВЛЯЕТ </h2>
+  </header>
+  
+  <section>
+  <div style="overflow-x:auto;">
+  <table>
+    <tr>
+      
+      <th> HHCJS ТЕЛЕВИЗОР "ПОТОК" </th>
+      <th>КАНАЛЫ</th>
+      
+    </tr>
+    <tr>
+    <tr>
+      <th>
+            <div id="player" class="tv-frame">
+                <div id="player-container"></div>
+            </div>
+       <div class="col-md-4">
+            <div class="row button-container">
+                <div class="col-md-12">
+                    <span id="switch-time">TV PLAYER BY "HHCJS"</span>
+                </div>
+         </div>
+    </div>
+        </th>
+    
+      
+      
+      
+      <th>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("button").click(function(){
+        $("div").scrollTop(1000);
+    });
+});
+</script>
+<div style=" transparent;height:350px;overflow:auto;">
+<div class="separator" style="clear: both; text-align: left;">
+
+        <div class="col-md-4">
+            <div class="row button-container">
+                
+                <div class="col-md-12">
+                    <button class="channel-button btn btn-success" id="ch1" type="button"
+                            onclick="switchChannel('1', event)">КАРАПУЗ ТВ<span class="timer"></span></button>
+                </div>
+                <div class="col-md-12">
+                    <button class="channel-button btn btn-warning" id="ch2" type="button"
+                            onclick="switchChannel('2', event)">EURONEWS<span class="timer"></span></button>
+                </div>
+                <div class="col-md-12">
+                    <button class="channel-button btn btn-primary" id="ch3" type="button"
+                            onclick="switchChannel('3', event)">RT DOC.<span class="timer"></span></button>
+                </div>
+              <div class="col-md-12">
+                    <button class="channel-button btn btn-success" id="ch4" type="button"
+                            onclick="switchChannel('4', event)">ЕРЕЙСКАЯ ПЕСНЯ<span class="timer"></span></button>
+                </div>
+              <div class="col-md-12">
+                    <button class="channel-button btn btn-success" id="ch4" type="button"
+                            onclick="switchChannel('5', event)">АВЕРС<span class="timer"></span></button>
+                </div>            
+              <div class="col-md-12">
+                    <button class="channel-button btn btn-success" id="ch4" type="button"
+                            onclick="switchChannel('6', event)">TVR 2<span class="timer"></span></button>
+                </div>              
+<div class="col-md-12">
+                    <button class="channel-button btn btn-success" id="ch4" type="button"
+                            onclick="switchChannel('7', event)">TVR 3<span class="timer"></span></button>
+                </div>              
+              
+            </div>
+  </div>
+  </div></th>
+    </tr>
+    
+    
+    
+  </table>
+</div>
+<script type="text/javascript">
+var timerEl, timer, interval, timeout, player, clickTime, switchTime;
+var delayTime = 0;
+
+var conf = {
+  key: 'b16b21bc-09e5-4690-bd5f-9bf2b0492f0a',
+  playback: {
+    autoplay: true,
+    muted: false
+  },
+  events: {
+    timechanged: onTimeChanged
+  }
+};
+
+function resetButtons() {
+  var container = document.querySelector('.button-container');
+  var buttons = container.getElementsByTagName('button');
+
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].removeAttribute('disabled');
+    var info = buttons[i].querySelector('.timer');
+    if (info) {
+      info.innerText = '';
+    }
+  }
+}
+
+function updateTimer(time) {
+  if (!timerEl) {
+    return;
+  }
+
+  timer = time;
+  timerEl.innerText = ' (' + time + ')';
+}
+
+function resetTimer() {
+  if (!timerEl) {
+    return;
+  }
+
+  timer = null;
+  timerEl.innerText = '';
+  timerEl = null;
+}
+
+function enableButton() {
+  if (!timerEl) {
+    return;
+  }
+
+  timerEl.parentElement.setAttribute('enabled', 'enabled');
+  resetTimer();
+}
+
+function onTimeChanged() {
+  if (!clickTime || switchTime) {
+    return;
+  }
+
+  switchTime = Date.now();
+  var diffTime = switchTime - clickTime - delayTime;
+  var diffEl = document.getElementById('switch-time');
+  diffEl.innerText = 'Канал загружен после ' + " " + diffTime + " " + 'ms' + "." + " " + "Наслаждайтесь и не забывайте делиться!";
+}
+
+function resetDiff() {
+  document.getElementById('switch-time').innerHTML = 'Ожидание канала ...';
+  clickTime = null;
+  switchTime = null;
+}
+
+function switchChannel(channelID, event) {
+  var delay = 0;
+
+  resetButtons();
+
+  if (event) {
+    player.pause();
+    resetDiff();
+    clickTime = Date.now();
+  }
+
+  if (event && event.target) {
+    timerEl = event.target.querySelector('.timer');
+  }
+
+  if (delayTime > 0 && timerEl) {
+    updateTimer(delayTime / 1000);
+    delay = delayTime;
+
+    clearInterval(interval);
+    interval = setInterval(function () {
+      updateTimer(--timer);
+    }, 1000);
+  }
+
+  clearTimeout(timeout);
+  timeout = setTimeout(function () {
+    enableButton();
+
+    var source;
+    if (channelID === '1') {
+      source = {
+        title: 'КАРАПУЗ ТВ',
+        description: 'HHCJS',
+        dash: '',
+        hls: 'https://karapuztv.fenixplustv.xyz/content/33418/index.m3u8'
+      }
+    } else if (channelID === '2') {
+      source = {
+        title: 'EURONEWS',
+        description: 'HHCJS',
+        dash: '',
+        hls: 'https://evronovosti.mediacdn.ru/sr1/evronovosti/playlist.m3u8'
+      };
+    } else if (channelID === '3') {
+      source = {
+        title: 'RT DOC.',
+        description: 'HHCJS',
+        dash: '',
+        hls: 'https://rtmp.api.rt.com/hls/rtdru.m3u8'
+      };
+ } else if (channelID === '4') {
+      source = {
+        title: 'ЕВРЕЙСКАЯ ПЕСНЯ',
+        description: 'HHCJS',
+        dash: '',
+        hls: 'https://keshethlslive-lh.akamaihd.net/i/24live_1@195271/index_1400_av-b.m3u8'
+      };
+   } else if (channelID === '5') {
+      source = {
+        title: 'АВЕРС',
+        description: 'HHCJS',
+        dash: '',
+        hls: 'https://avers.pp.ua/hls/efir.m3u8'
+      };
+    } else if (channelID === '6') {
+      source = {
+        title: 'TVR 2',
+        description: 'TVR 2 is offered by YOAMMEDIA IPTV',
+        dash: '',
+        hls: 'http://89.136.209.26:1935/liveedge/TVR2.stream/playlist.m3u8'
+      };  
+      } else if (channelID === '7') {
+      source = {
+        title: 'TVR 3',
+        description: 'TVR 3 is offered by YOAMMEDIA IPTV',
+        dash: '',
+        hls: 'http://s1.electru.biz:8080/live/nick1/nick1/84703.m3u8'
+      };  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    }
+      else {
+      source = {
+        title: 'X',
+        description: 'X is offered by YOAMMEDIA IPTV',
+        dash: '',
+        hls: 'xxx'
+      }
+    }
+    player.load(source);
+  }, delay);
+}
+
+(function () {
+  var playerContainer = document.getElementById('player-container');
+  player = new bitmovin.player.Player(playerContainer, conf);
+
+  switchChannel('1');
+})();
+
+</script>
+
+</section>
+
+
+<footer>
+        <br>
+        <h2>Автор идеи: Берлин Андрей</h2>
+        <br>
+       <p><em>Я стремлюсь к созданию веб приложений, которые можно применить к повседневной жизни.</em></p>
+   
+   <h3>Контакты</h3>
+   <ul>
+     <li>
+       <address>
+     По всем техническим вопросам пишите мне:<a href="mailto:andrew.berlin96@gmail.com"> на мой электронный адрес</a>.
+      </address>
+     </li>
+
+     
+     <li>Project maintained by <a href="https://berlinandrew.github.io/">Berlin Andrew</a></li>
+     <li>Hosted on GitHub Pages: <a href="https://github.com/berlinandrew">berlinandrew</a></li>
+   </ul>
+</footer>
+</body>
+
+
+
+
+</html>
+<!-- partial -->
+  
+
+
