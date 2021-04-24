@@ -2,15 +2,15 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>тв прямой эфир</title>
+  <title>Интернет Телевизор "ПОТОК"</title>
 <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
 <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet1" type="text/css"></link>
 <link href="stylel.css" rel="stylesheet" type="text/css"></link>
   <link crossorigin="anonymous" href="bootstrap.min.css" rel="stylesheet1"></link>
-<script type="text/javascript" src="bitmovinplayer.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.bitmovin.com/player/web/8.58.0/bitmovinplayer.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 /*start HideBitmovinLogo*/
 .bmpui-ui-watermark {
@@ -72,7 +72,7 @@ tr:nth-child(even){background-color: #f2f2f2}
   
   <header>
     <h1>ИНТЕРНЕТ ТЕЛЕВИЗОР "ПОТОК"</h1>
-    <br>
+    
     <h2>ВЕБ - СТУДИЯ "HHCJS" ПРЕДСТАВЛЯЕТ </h2>
   </header>
   
@@ -139,7 +139,7 @@ $(document).ready(function(){
                 </div>            
               <div class="col-md-12">
                     <button class="channel-button btn btn-success" id="ch4" type="button"
-                            onclick="switchChannel('6', event)">TVR 2<span class="timer"></span></button>
+                            onclick="switchChannel('6', event)">ХЕРСОН ТВ<span class="timer"></span></button>
                 </div>              
 <div class="col-md-12">
                     <button class="channel-button btn btn-success" id="ch4" type="button"
@@ -295,10 +295,10 @@ function switchChannel(channelID, event) {
       };
     } else if (channelID === '6') {
       source = {
-        title: 'TVR 2',
-        description: 'TVR 2 is offered by YOAMMEDIA IPTV',
+        title: 'ХЕРСОН ТВ',
+        description: 'HHCJS',
         dash: '',
-        hls: 'http://89.136.209.26:1935/liveedge/TVR2.stream/playlist.m3u8'
+        hls: 'https://webcams.ks.ua/hls/khersonplus.m3u8'
       };  
       } else if (channelID === '7') {
       source = {
@@ -337,6 +337,28 @@ function switchChannel(channelID, event) {
 })();
 
 </script>
+
+  
+ <ul>
+<li>
+   <b>Домашняя страница:</b>
+  <a class= "button" href="https://berlinandrew.github.io/index.html">
+     <strong>▶️ "Веб - страница Берлина Андрея".
+     </strong>
+     </a> Добро пожаловать!
+</li>
+<br>
+<li> 
+     <b>Веб - студия:</b>
+     <a class= "button" href="https://berlinandrew.github.io/studio-hhcjs.html">
+     <strong>"hhcjs".
+     </strong>
+     </a>
+     Добро пожаловать!
+
+
+ </li>
+</ul>
 
 </section>
 
